@@ -1,0 +1,75 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #EE1515;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #FFCB05;
+    text-shadow: 2px 2px 0px #3B4CCA;
+    letter-spacing: 2px;
+}
+
+.container {
+    background-color: #ffffff;
+    border: 4px solid #222224;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.pokemon-silhouette {
+    filter: brightness(0); 
+    width: 200px; 
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 30px auto; 
+    user-select: none; 
+    -webkit-user-drag: none;
+}
+
+.pokemon-silhouette.revealed {
+    filter: none;
+}
+
+button.btn {
+    background-color: #FFCB05;
+    color: #222224;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: 3px solid #222224;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s, box-shadow 0.1s;
+    margin-bottom: 15px;
+}
+
+button.btn:last-child {
+    margin-bottom: 0;
+}
+
+button.btn:hover {
+    background-color: #f7c320;
+}
+
+button.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
