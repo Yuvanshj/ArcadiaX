@@ -1,5 +1,3 @@
-# Guess & Learn Game App
-
 ## Overview
 
 Guess & Learn is an interactive quiz-based web application that allows users to test their knowledge in a fun and engaging way. The app fetches real-time quiz data from public APIs and presents it in a game format with scoring, timers, and instant feedback.
