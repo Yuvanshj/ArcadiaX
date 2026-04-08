@@ -1,6 +1,6 @@
 ## Overview
 
-Guess & Learn is an interactive quiz-based web application that allows users to test their knowledge in a fun and engaging way. The app fetches real-time quiz data from public APIs and presents it in a game format with scoring, timers, and instant feedback.
+ArcadiaX is an interactive quiz-based web application that allows users to test their knowledge in a fun and engaging way. The app fetches real-time quiz data from public APIs and presents it in a game format with scoring, timers, and instant feedback.
 
 This project demonstrates the use of JavaScript concepts such as API integration, DOM manipulation, event handling, and array higher-order functions.
 
