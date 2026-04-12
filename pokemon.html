@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who's That Pokémon?</title>
+    <meta name="description" content="Test your Pokémon knowledge! Guess the silhouette in this classic Who's That Pokémon challenge.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/style.css">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="pokeball-loader">
+            <div class="pokeball-top"></div>
+            <div class="pokeball-center"></div>
+            <div class="pokeball-bottom"></div>
+        </div>
+        <p class="loading-text">Loading Pokémon<span class="dots">...</span></p>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="game-screen hidden">
+        <!-- Back Button -->
+        <a href="index.html" class="btn-back">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Dashboard</span>
+        </a>
+
+        <!-- Aspect-Ratio Preserving Wrapper for Exact Alignment -->
+        <div class="bg-wrapper">
+            <!-- Background Template -->
+            <img src="./assets/Who's That Pokemon Upscale.jpeg" alt="" class="bg-template" draggable="false">
+
+            <!-- Pokémon Silhouette Area (positioned over the starburst) -->
+            <div class="silhouette-area">
+                <img alt="Who's that Pokémon?" id="pokemonsilhouette" class="pokemon-silhouette" draggable="false" oncontextmenu="return false;">
+            </div>
+        </div>
+
+        <!-- Title Overlay -->
+        <div class="title-bar">
+            <h1 id="gameTitle">Who's That Pokémon?</h1>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-display" id="scoreDisplay">
+            <div class="score-item">
+                <span class="score-label">Score</span>
+                <span class="score-value" id="scoreValue">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Streak</span>
+                <span class="score-value" id="streakValue">0 🔥</span>
+            </div>
+        </div>
+
+        <!-- Name Reveal Overlay -->
+        <div id="nameReveal" class="name-reveal hidden">
+            <span id="revealedName"></span>
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+            <!-- Guess Input -->
+            <div class="guess-section" id="guessSection">
+                <input type="text" id="guessInput" class="guess-input" placeholder="Enter Pokémon name..." autocomplete="off" spellcheck="false">
+                <button class="btn btn-guess" id="btnGuess" onclick="submitGuess()">
+                    <span>Guess!</span>
+                </button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-reveal" id="btnReveal" onclick="revealPokemon()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    <span>Reveal</span>
+                </button>
+                <button class="btn btn-next" id="btnNext" onclick="nextPokemon()">
+                    <span>Next</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Feedback Toast -->
+        <div id="feedbackToast" class="feedback-toast hidden">
+            <span id="feedbackText"></span>
+        </div>
+    </div>
+
+    <script src="./JS/Pokemon.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess & Learn Trivia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./CSS/style.css"> <!-- Base styles -->
+    <link rel="stylesheet" href="./CSS/trivia.css"> <!-- Trivia specific -->
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="index.html" class="btn-back" style="z-index: 100; position: absolute; top: 1.5rem; left: 1.5rem;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        <span>Dashboard</span>
+    </a>
+
+    <!-- Setup Screen -->
+    <div id="setupScreen" class="screen active">
+        <div class="flat-panel">
+            <div class="panel-header">
+                <span class="emoji-icon">🧠</span>
+                <h1>Trivia Challenge</h1>
+                <p>Select your configuration to begin</p>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="categorySelect">
+                    <option value="any">Any Category</option>
+                    <option value="9">General Knowledge</option>
+                    <option value="17">Science & Nature</option>
+                    <option value="18">Computers</option>
+                    <option value="15">Video Games</option>
+                    <option value="21">Sports</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Difficulty</label>
+                <select id="difficultySelect">
+                    <option value="any">Any Difficulty</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <button class="btn-primary" id="btnStartGame">Start Game</button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen hidden">
+        <div class="top-bar">
+            <div class="score-pill">Score: <span id="currentScore">0</span></div>
+            <div class="question-tracker">Question <span id="currentQuestionNum">1</span>/10</div>
+        </div>
+
+        <div class="timer-container">
+            <div class="timer-bar" id="timerBar"></div>
+        </div>
+
+        <div class="question-wrapper">
+            <div class="corner-bl"></div>
+            <div class="corner-tr"></div>
+            <div class="question-box">
+                <div class="question-content">
+                    <span class="category-badge" id="questionCategory">Category</span>
+                    <h2 id="questionText">Question Text Goes Here</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="answers-grid" id="answersGrid">
+            <!-- Answer buttons injected by JS -->
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="screen hidden">
+        <div class="flat-panel">
+            <div class="panel-header">
+                <span class="emoji-icon">🏆</span>
+                <h1>Game Over!</h1>
+            </div>
+            <div class="results-stats">
+                <div class="stat-box" style="margin-bottom: 2rem;">
+                    <span style="display: block; opacity: 0.8; margin-bottom: 0.5rem; font-weight: 700; font-size: 1.2rem;">Final Score</span>
+                    <h2 id="finalScoreDisplay" style="font-size: 4rem; color: #10B981; margin: 0; font-weight: 900;">0</h2>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn-primary" id="btnPlayAgain">Play Again</button>
+                <a href="index.html" class="btn-secondary" style="text-align: center;">Return to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./JS/Trivia.js"></script>
+</body>
+</html>
