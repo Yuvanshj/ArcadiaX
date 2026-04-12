@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher or Lower — ArcadiaX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/ratings.css">
+</head>
+<body>
+
+    <div id="setupScreen" class="screen active">
+        <a href="../index.html" class="btn-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Dashboard
+        </a>
+        <div class="setup-layout">
+            <div class="title-block">
+                <h1><span style="color:#22c55e">Higher</span><br>or <span style="color:#ef4444">Lower</span></h1>
+                <p>Which game has the better Metacritic score?</p>
+            </div>
+
+            <div class="search-wrap">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="searchInput" placeholder="narrow by game name" autocomplete="off">
+            </div>
+
+            <div>
+                <div class="chips-label">Genre</div>
+                <div class="genre-row" id="genreFilters"></div>
+            </div>
+
+            <div class="setup-footer">
+                <div class="streak-block">
+                    <span class="streak-label">Best Streak</span>
+                    <span class="streak-num" id="highStreakDisplay">0</span>
+                </div>
+                <button id="btnStart" class="btn-play" disabled>Play</button>
+            </div>
+
+            <p class="status-line" id="loadStatus">Fetching games...</p>
+        </div>
+    </div>
+
+    <div id="gameScreen" class="screen">
+        <div class="game-top">
+            <div class="game-stat">🔥 <span id="streakDisplay">0</span></div>
+            <div class="game-question">Metacritic — which is higher?</div>
+            <div class="game-stat">Round <span id="roundNum">1</span></div>
+        </div>
+        <div class="arena">
+            <div class="game-card" id="cardLeft">
+                <div class="card-bg" id="bgLeft"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-tags" id="badgesLeft"></div>
+                    <h2 class="card-title" id="titleLeft"></h2>
+                    <div class="meta-badge" id="scoreLeft">?</div>
+                </div>
+            </div>
+            <div class="vs-mark">VS</div>
+            <div class="game-card" id="cardRight">
+                <div class="card-bg" id="bgRight"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-tags" id="badgesRight"></div>
+                    <h2 class="card-title" id="titleRight"></h2>
+                    <div class="meta-badge" id="scoreRight">?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultsScreen" class="screen">
+        <a href="../index.html" class="btn-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Dashboard
+        </a>
+        <div class="results-layout">
+            <p class="results-label">Game Over</p>
+            <div class="results-scores">
+                <div class="result-item">
+                    <span class="result-num" id="finalStreak">0</span>
+                    <span class="result-sub">streak</span>
+                </div>
+                <div class="result-divider">/</div>
+                <div class="result-item">
+                    <span class="result-num gold" id="finalBest">0</span>
+                    <span class="result-sub">best</span>
+                </div>
+            </div>
+            <div class="results-actions">
+                <button id="btnPlayAgain" class="btn-play">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/Ratings.js"></script>
+</body>
+</html>

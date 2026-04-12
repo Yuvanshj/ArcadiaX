@@ -1,78 +1,85 @@
-## Overview
+# ArcadiaX
 
-ArcadiaX is an interactive quiz-based web application that allows users to test their knowledge in a fun and engaging way. The app fetches real-time quiz data from public APIs and presents it in a game format with scoring, timers, and instant feedback.
-
-This project demonstrates the use of JavaScript concepts such as API integration, DOM manipulation, event handling, and array higher-order functions.
+A gaming dashboard and mini-game platform built with vanilla HTML, CSS, and JavaScript. ArcadiaX brings together multiple games under a clean, dark-themed interface with a focus on fast, casual gameplay.
 
 ---
 
-## Features
+## Games
 
-### Core Features
+### Who's That Pokémon?
+Guess the Pokémon from its silhouette. A new Pokémon is pulled from the PokéAPI on every round — all 1025 of them. The silhouette slowly idles until you guess correctly or hit reveal, with a running score and streak counter.
 
-* 🎮 Play quiz with multiple-choice questions
-* 🔍 Fetch real-time questions from a public API
-* ⏱ Timer-based questions for added challenge
-* 🧠 Score tracking system
-* ✅ Instant feedback (correct / incorrect answers)
+### Guess & Learn Trivia
+A timed multiple-choice trivia game powered by the Open Trivia DB. Pick a category and difficulty, then answer 10 questions before the timer runs out. Scoring gives bonus points based on how fast you answer.
 
-### Advanced Features
-
-* 🏆 Leaderboard (stored using localStorage)
-* 📊 Progress tracking during the quiz
-* 🔄 Restart / Replay quiz functionality
-* 🌙 Dark Mode / Light Mode toggle
-
-### Bonus Enhancements (Optional)
-
-* 🎯 Difficulty selection (easy, medium, hard)
-* 📚 Category-based quizzes (science, tech, general knowledge)
-* ⚡ Debounced user interactions
-* 📄 Pagination for multiple question sets
+### Higher or Lower: Game Ratings
+Two video games appear side by side. Pick which one has the higher Metacritic score and keep your streak alive. Filter by genre (RPG, Shooter, Action, etc.) before playing. Powered by a local dataset of 50 real games with real Metacritic scores.
 
 ---
 
-## APIs Used
+## JavaScript Features
 
-### 1. Trivia API
+### Array Higher-Order Functions
+Every interactive feature uses HOFs — no traditional loops for data processing.
 
-Used to fetch quiz questions dynamically
-👉 https://opentdb.com/api_config.php
+| Feature | HOF Used |
+|---|---|
+| Genre filter chips | `map()` over unique genres via `new Set(GAMES.map(...))` |
+| Filter games by genre | `filter()` |
+| Shuffle game pool | `map()` + `sort()` |
+| Render badge elements | `map()` + `join()` |
+| Search games by title | `filter()` |
+| Get unique genre list | `map()` + `Set` + spread |
 
-### 2. Pokémon API (Optional Mode)
-
-Used for a fun “Guess the Pokémon” game mode
-👉 https://pokeapi.co/
-
----
-
-## Technologies Used
-
-* HTML
-* CSS (Tailwind CSS / Bootstrap optional)
-* JavaScript (ES6+)
-
----
-
-## 💡 Future Improvements
-
-* Add multiplayer mode
-* Add animations and sound effects
-* Improve UI/UX with better transitions
-* Add more quiz categories and game modes
+### Other Features
+- `localStorage` for high score / streak persistence (Higher or Lower, Trivia)
+- Loading state during API fetch (Pokémon game)
+- Error handling for failed API calls
+- Fully responsive layout across mobile, tablet, desktop
 
 ---
 
-## ✅ Best Practices Followed
+## Tech Stack
 
-* Clean and modular code structure
-* Use of array higher-order functions (map, filter, sort)
-* Responsive design for all devices
-* Error handling for API calls
-* Use of localStorage for persistence
+- HTML, CSS, JavaScript — no frameworks, no build tools
+- [PokéAPI](https://pokeapi.co/) — Pokémon data and sprites
+- [Open Trivia DB](https://opentdb.com/api_config.php) — trivia questions
+- Google Fonts (Outfit)
+- localStorage — high score persistence
 
 ---
 
-## 👨‍💻 Author
+## Project Structure
 
-Yuvansh
+```
+ArcadiaX/
+├── index.html              # Main dashboard
+├── assets/                 # Cover art and background images
+├── gameshtml/
+│   ├── pokemon.html        # Who's That Pokémon game
+│   └── trivia.html         # Guess & Learn Trivia game
+├── CSS/
+│   ├── dashboard.css       # Dashboard styles
+│   ├── style.css           # Pokémon game styles
+│   └── trivia.css          # Trivia game styles
+└── JS/
+    ├── dashboard.js        # Search bar logic
+    ├── Pokemon.js          # Pokémon game logic
+    └── Trivia.js           # Trivia game logic
+```
+
+---
+
+## Running Locally
+
+No build step needed. Just open `index.html` in your browser, or serve it with any static file server:
+
+```bash
+npx serve .
+```
+
+---
+
+## Author
+
+Yuvansh Juneja
