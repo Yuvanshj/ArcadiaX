@@ -7,17 +7,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./CSS/style.css"> <!-- Base styles -->
-    <link rel="stylesheet" href="./CSS/trivia.css"> <!-- Trivia specific -->
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/trivia.css">
 </head>
 <body>
-    <!-- Back Button -->
-    <a href="index.html" class="btn-back" style="z-index: 100; position: absolute; top: 1.5rem; left: 1.5rem;">
+    <a href="../index.html" class="btn-back" style="z-index: 100; position: absolute; top: 1.5rem; left: 1.5rem;">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
         <span>Dashboard</span>
     </a>
 
-    <!-- Setup Screen -->
     <div id="setupScreen" class="screen active">
         <div class="flat-panel">
             <div class="panel-header">
@@ -49,7 +47,6 @@
         </div>
     </div>
 
-    <!-- Game Screen -->
     <div id="gameScreen" class="screen hidden">
         <div class="top-bar">
             <div class="score-pill">Score: <span id="currentScore">0</span></div>
@@ -72,11 +69,9 @@
         </div>
 
         <div class="answers-grid" id="answersGrid">
-            <!-- Answer buttons injected by JS -->
         </div>
     </div>
 
-    <!-- Results Screen -->
     <div id="resultsScreen" class="screen hidden">
         <div class="flat-panel">
             <div class="panel-header">
@@ -91,11 +86,11 @@
             </div>
             <div class="btn-group">
                 <button class="btn-primary" id="btnPlayAgain">Play Again</button>
-                <a href="index.html" class="btn-secondary" style="text-align: center;">Return to Home</a>
+                <a href="../index.html" class="btn-secondary" style="text-align: center;">Return to Home</a>
             </div>
         </div>
     </div>
 
-    <script src="./JS/Trivia.js"></script>
+    <script src="../JS/Trivia.js"></script>
 </body>
 </html>

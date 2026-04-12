@@ -1,12 +1,10 @@
-// State variables
 let currentQuestions = [];
 let currentQuestionIndex = 0;
 let score = 0;
-let timerTime = 15; // seconds per question
+let timerTime = 15;
 let timerInterval = null;
 let isAnsweringDisabled = false;
 
-// DOM Elements
 const setupScreen = document.getElementById('setupScreen');
 const gameScreen = document.getElementById('gameScreen');
 const resultsScreen = document.getElementById('resultsScreen');
@@ -25,14 +23,12 @@ const timerBar = document.getElementById('timerBar');
 const finalScoreDisplay = document.getElementById('finalScoreDisplay');
 const btnPlayAgain = document.getElementById('btnPlayAgain');
 
-// Utility: Decode HTML entities
 function decodeHTML(html) {
     const txt = document.createElement('textarea');
     txt.innerHTML = html;
     return txt.value;
 }
 
-// Utility: Shuffle Array
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -41,9 +37,7 @@ function shuffleArray(array) {
     return array;
 }
 
-// 1. Fetches data and starts the game
 async function startGame() {
-    // UI Loading state
     btnStartGame.disabled = true;
     btnStartGame.innerText = "Loading Questions...";
 
@@ -82,7 +76,6 @@ function updateScoreUI() {
     currentScoreElement.innerText = score;
 }
 
-// 2. Load Question UI
 function loadQuestion() {
     isAnsweringDisabled = false;
     currentQuestionNum.innerText = currentQuestionIndex + 1;
@@ -91,7 +84,6 @@ function loadQuestion() {
     questionCategory.innerText = decodeHTML(data.category);
     questionText.innerText = decodeHTML(data.question);
 
-    // Merge correct and incorrect answers and shuffle
     const allAnswers = [...data.incorrect_answers, data.correct_answer];
     shuffleArray(allAnswers);
 
@@ -100,7 +92,6 @@ function loadQuestion() {
     answersGrid.innerHTML = '';
     
     allAnswers.forEach((answer, index) => {
-        // Wrapper for decorators
         const wrapper = document.createElement('div');
         wrapper.className = 'answer-wrapper';
         
@@ -112,7 +103,6 @@ function loadQuestion() {
         const btn = document.createElement('button');
         btn.classList.add('btn-answer');
         
-        // Inner content to un-skew
         const btnContent = document.createElement('div');
         btnContent.className = 'btn-answer-content';
         
@@ -140,13 +130,11 @@ function loadQuestion() {
     startTimer();
 }
 
-// 3. Timer Logic
 function startTimer() {
     clearInterval(timerInterval);
     timerBar.style.transition = 'none';
     timerBar.style.width = '100%';
     
-    // Force reflow
     void timerBar.offsetWidth;
 
     timerTime = 15;
@@ -170,13 +158,12 @@ function stopTimer() {
     clearInterval(timerInterval);
     const currentWidth = timerBar.style.width;
     timerBar.style.transition = 'none';
-    timerBar.style.width = currentWidth; // Freeze at current spot
+    timerBar.style.width = currentWidth;
 }
 
 function handleTimeOut() {
     if (isAnsweringDisabled) return;
     
-    // Find correct button and mark it, disable others
     const buttons = answersGrid.querySelectorAll('.btn-answer');
     const correctAnswerText = decodeHTML(currentQuestions[currentQuestionIndex].correct_answer);
 
@@ -186,7 +173,7 @@ function handleTimeOut() {
         if (answerText === correctAnswerText) {
             btn.classList.add('correct');
         } else {
-            btn.classList.add('incorrect'); // User didn't pick, but we mark them to show fail state
+            btn.classList.add('incorrect');
         }
     });
 
@@ -194,7 +181,6 @@ function handleTimeOut() {
     setTimeout(nextQuestion, 2000);
 }
 
-// 4. Answer Handling
 function handleAnswerSelected(selectedBtn, isCorrect) {
     if (isAnsweringDisabled) return;
     isAnsweringDisabled = true;
@@ -207,14 +193,13 @@ function handleAnswerSelected(selectedBtn, isCorrect) {
         btn.disabled = true;
         const answerText = btn.querySelector('.answer-text').innerText;
         if (answerText === correctAnswerText) {
-            btn.classList.add('correct'); // Highlight answer
+            btn.classList.add('correct');
         } else if (btn === selectedBtn && !isCorrect) {
-            btn.classList.add('incorrect'); // Mark wrong if picked
+            btn.classList.add('incorrect');
         }
     });
 
     if (isCorrect) {
-        // Calculate points based on time left
         const timeBonus = timerTime * 10;
         score += (100 + timeBonus);
         updateScoreUI();
@@ -223,7 +208,6 @@ function handleAnswerSelected(selectedBtn, isCorrect) {
     setTimeout(nextQuestion, 2000);
 }
 
-// 5. Game Flow Logic
 function nextQuestion() {
     currentQuestionIndex++;
 
@@ -238,14 +222,12 @@ function endGame() {
     showScreen(resultsScreen);
     finalScoreDisplay.innerText = score;
     
-    // Save to local storage logic (optional basic implementation)
     const highScore = localStorage.getItem('triviaHighScore') || 0;
     if (score > highScore) {
         localStorage.setItem('triviaHighScore', score);
     }
 }
 
-// System Helpers
 function showScreen(screenEl) {
     [setupScreen, gameScreen, resultsScreen].forEach(el => el.classList.remove('active'));
     [setupScreen, gameScreen, resultsScreen].forEach(el => el.classList.add('hidden'));
@@ -254,7 +236,6 @@ function showScreen(screenEl) {
     screenEl.classList.add('active');
 }
 
-// Event Listeners
 btnStartGame.addEventListener('click', startGame);
 btnPlayAgain.addEventListener('click', () => {
     showScreen(setupScreen);

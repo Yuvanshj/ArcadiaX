@@ -5,7 +5,6 @@ let score = 0;
 let streak = 0;
 let isRevealed = false;
 
-// ===== UTILITY =====
 function getRandomPokemon() {
     const randomIndex = Math.floor(Math.random() * pokemonList.length);
     const selectedPokemon = pokemonList[randomIndex];
@@ -24,34 +23,28 @@ function preloadImage(url) {
     });
 }
 
-// ===== DATA FETCHING =====
 async function getPokemonData() {
     try {
         const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=1025");
         const data = await response.json();
         pokemonList = data.results;
 
-        // Load first Pokémon
         currentPokemonData = getRandomPokemon();
         await preloadImage(currentPokemonData.png);
         displayPokemon(currentPokemonData);
 
-        // Prefetch next
         nextPokemonData = getRandomPokemon();
         preloadImage(nextPokemonData.png);
 
-        // Hide loading, show game
         document.getElementById("loadingScreen").classList.add("hidden");
         document.getElementById("gameScreen").classList.remove("hidden");
 
-        // Focus the input
         document.getElementById("guessInput").focus();
     } catch (error) {
         console.error("Failed to fetch Pokémon data:", error);
     }
 }
 
-// ===== DISPLAY =====
 function displayPokemon(pokemonData) {
     const pokemonImage = document.getElementById("pokemonsilhouette");
     const nameReveal = document.getElementById("nameReveal");
@@ -63,18 +56,15 @@ function displayPokemon(pokemonData) {
     nameReveal.classList.add("hidden");
     isRevealed = false;
 
-    // Clear the input
     const input = document.getElementById("guessInput");
     input.value = "";
     input.disabled = false;
     input.focus();
 
-    // Enable buttons
     document.getElementById("btnGuess").disabled = false;
     document.getElementById("btnReveal").disabled = false;
 }
 
-// ===== GAME LOGIC =====
 function submitGuess() {
     if (isRevealed || !currentPokemonData) return;
 
@@ -89,14 +79,12 @@ function submitGuess() {
     const correctName = currentPokemonData.name.toLowerCase();
 
     if (guess === correctName) {
-        // Correct!
         score++;
         streak++;
         updateScore();
         revealPokemon();
         showFeedback("Correct! ✨", "correct");
     } else {
-        // Incorrect
         streak = 0;
         updateScore();
         showFeedback(`Nope! It's ${currentPokemonData.name}`, "incorrect");
@@ -126,7 +114,6 @@ function revealPokemon() {
     document.getElementById("guessInput").disabled = true;
     document.getElementById("btnGuess").disabled = true;
 
-    // If revealed without guessing, break streak
     if (!document.getElementById("guessInput").value.trim()) {
         streak = 0;
         updateScore();
@@ -136,14 +123,12 @@ function revealPokemon() {
 function nextPokemon() {
     if (pokemonList.length === 0) return;
 
-    // Hide any feedback
     hideFeedback();
 
     if (nextPokemonData) {
         currentPokemonData = nextPokemonData;
         displayPokemon(currentPokemonData);
 
-        // Prefetch next
         nextPokemonData = getRandomPokemon();
         preloadImage(nextPokemonData.png);
     } else {
@@ -160,22 +145,18 @@ function updateScore() {
     document.getElementById("streakValue").textContent = `${streak} 🔥`;
 }
 
-// ===== FEEDBACK =====
 function showFeedback(text, type) {
     const toast = document.getElementById("feedbackToast");
     const feedbackText = document.getElementById("feedbackText");
 
-    // Remove previous classes
     toast.classList.remove("hidden", "correct", "incorrect");
     toast.style.animation = "none";
-    // Force reflow
     void toast.offsetWidth;
 
     feedbackText.textContent = text;
     toast.classList.add(type);
     toast.style.animation = "toast-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards";
 
-    // Auto hide after 2s
     setTimeout(() => {
         toast.style.animation = "toast-out 0.4s ease forwards";
         setTimeout(() => {
@@ -197,9 +178,7 @@ function shakeInput() {
     setTimeout(() => { input.style.animation = ""; }, 400);
 }
 
-// ===== EVENT LISTENERS =====
 document.addEventListener("DOMContentLoaded", () => {
-    // Enter key to guess
     document.getElementById("guessInput").addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
             submitGuess();
@@ -207,5 +186,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ===== INIT =====
 getPokemonData();
